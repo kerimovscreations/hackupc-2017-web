@@ -28,21 +28,30 @@
                         <a href="#" class="active title tab-title">Upload</a>
                     </li>
                     <li>
-                        <a href="#" class="title tab-title">Take new picture</a>
+                        <a href="#" class="title tab-title" (click)='startStreaming()'>Take new picture</a>
                     </li>
                 </ul>
             </div>
             <div class="modal-body flex-grow flex">
-                <div class="tab-content flex-grow " data-name='upload'>
-                    <app-filedrop (dragFileAccepted)="uploadfile( $event.file ) " (dragover)='hoverUpload()'>
-                        <label class="drop flex flex-middle flex-center" [ngClass]='{"hovering":hovering}'>
-                            <div class="flex flex-col label-content" >
+                <div class="tab-content flex-grow active flex " data-name='upload'>
+                    <app-filedrop class="flex-grow-full" (dragFileAccepted)="uploadfile( $event.file ) " (hoverIn)='hoverIn()' (hoverOut)='hoverOut()'>
+                        <label for="file" class="drop flex flex-middle flex-center flex-grow-full" [ngClass]='{"hovering":hovering}'>
+                            <div class="flex flex-col label-content flex-grow-full" >
                                     <span class="lnr lnr-cloud-upload"></span>                     
                                     <span class='title'>DRAG & DROP</span>
                                     <p class='desc'>your files to Assets or browse</p>
                             </div>
                         </label>
+                        <input type="file" id='file'>
                     </app-filedrop>
+                </div>
+                <div class="tab-content start-camera">
+                    <div class="camera">
+                        <video id="video" class="camera_stream" width="496">Video stream not available.</video>
+                    </div>
+                    <button (click)='takePicture()'>Click</button>
+                    <img src="photo" alt="">
+                    <canvas></canvas>
                 </div>
                 <div class="tab-content">
                     <input type="file" accept="image/*;capture=camera">
@@ -53,13 +62,4 @@
             </div>
         </div>
     </div>
-</div>
-<div class="camera">
-    <video id="video">Video stream not available.</video>
-    <button id="startbutton">Take photo</button>
-</div>
-<canvas id="canvas">
-        </canvas>
-<div class="output">
-    <img id="photo" alt="The screen capture will appear in this box.">
 </div>

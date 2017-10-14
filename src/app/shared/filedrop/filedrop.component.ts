@@ -7,23 +7,32 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class FiledropComponent implements OnInit {
 
+  @Output() public dragFileAccepted: EventEmitter<Object> = new EventEmitter();
+  @Output() public hoverIn: EventEmitter<Object> = new EventEmitter();
+  @Output() public hoverOut: EventEmitter<Object> = new EventEmitter();
+  isHovering;
   constructor() { }
 
   ngOnInit() {
   }
-  @Output() public dragFileAccepted: EventEmitter<Object> = new EventEmitter();
-  public isHovering: boolean = false;
+
 
   private onDragFileOverStart(event) {
     if (!this.isHovering) {
       this.isHovering = true;
     }
+    if(this.hoverIn){
+      this.hoverIn.emit(true);
+    }
     this.preventDefaultAndStopPropagation(event);
     return false;
-  };
+  }
 
   private onDragFileOverEnd(event): any {
     this.preventDefaultAndStopPropagation(event);
+    if(this.hoverOut){
+      this.hoverOut.emit(false);
+    }
     return false;
   }
 

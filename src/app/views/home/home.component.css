@@ -13,4 +13,17 @@
 
 .modal .modal-frame .modal-body .tab-content .drop.hovering {
     color: black;
+    border-color: black;
+}
+
+.modal .modal-frame .modal-body .tab-content {
+    display: none;
+}
+
+.modal .modal-frame .modal-body .tab-content.active {
+    display: block;
+}
+
+input[type='file'] {
+    display: none;
 }
