@@ -1,0 +1,65 @@
+<div class="container-holder flex flex-middle flex-center ">
+    <div class="frame">
+        <div class="title">
+            <h1>
+                Upload image
+            </h1>
+        </div>
+        <div class="file-holder drop-zone" (click)='onSelectPhoto()'>
+            <label class="flex flex-middle flex-center" for="file-upload"> 
+            <span class="lnr lnr-cloud-upload"></span> 
+            <span>
+            Choose picture
+            </span>
+          </label>
+        </div>
+        <button class="submit">
+        CONVERT
+      </button>
+    </div>
+</div>
+
+<div class="modal flex flex-middle flex-center" data-name="file-upload">
+    <div class="modal-frame flex flex-col">
+        <div class="flex flex-col content-holder flex-grow-full">
+            <div class="modal-header">
+                <ul>
+                    <li>
+                        <a href="#" class="active title tab-title">Upload</a>
+                    </li>
+                    <li>
+                        <a href="#" class="title tab-title">Take new picture</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-body flex-grow flex">
+                <div class="tab-content flex-grow " data-name='upload'>
+                    <app-filedrop (dragFileAccepted)="uploadfile( $event.file ) " (dragover)='hoverUpload()'>
+                        <label class="drop flex flex-middle flex-center" [ngClass]='{"hovering":hovering}'>
+                            <div class="flex flex-col label-content" >
+                                    <span class="lnr lnr-cloud-upload"></span>                     
+                                    <span class='title'>DRAG & DROP</span>
+                                    <p class='desc'>your files to Assets or browse</p>
+                            </div>
+                        </label>
+                    </app-filedrop>
+                </div>
+                <div class="tab-content">
+                    <input type="file" accept="image/*;capture=camera">
+                </div>
+            </div>
+            <div class="close" (click)='onSelectPhoto()'>
+                <span class="lnr lnr-cross"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="camera">
+    <video id="video">Video stream not available.</video>
+    <button id="startbutton">Take photo</button>
+</div>
+<canvas id="canvas">
+        </canvas>
+<div class="output">
+    <img id="photo" alt="The screen capture will appear in this box.">
+</div>
