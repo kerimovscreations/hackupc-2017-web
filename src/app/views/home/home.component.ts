@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   uploadActive: boolean = false;
   hovering: boolean = false;
 
+
+  isPictureTaken:boolean=false;
   ngOnInit() { }
 
   onSelectPhoto() {
@@ -76,8 +78,8 @@ export class HomeComponent implements OnInit {
     let image:any = document.querySelector('img.photo');
 
     // Get the exact size of the video element.
-    var width = video.videoWidth;
-    var height = video.videoHeight;
+    var width = video.offsetWidth;
+    var height = video.offsetHeight;
 
     // Context object for working with the canvas.
     var context = hidden_canvas.getContext('2d');
@@ -89,11 +91,12 @@ export class HomeComponent implements OnInit {
     // Draw a copy of the current frame from the video on the canvas.
     context.drawImage(video, 0, 0, width, height);
 
-    // Get an image dataURL from the canvas.
+    // Get an image dataURL from the canvas.a
     var imageDataURL = hidden_canvas.toDataURL('image/png');
 
     // Set the dataURL as source of an image element, showing the captured photo.
     image.setAttribute('src', imageDataURL);
+    this.isPictureTaken = !this.isPictureTaken;
   }
 
   uploadfile(file) {
@@ -107,4 +110,16 @@ export class HomeComponent implements OnInit {
   hoverOut() {
     this.hovering = false;
   }
+
+   // tslint:disable-next-line:one-line
+   takeSnapshot(){
+    
+        //...
+    
+        // Get an image dataURL from the canvas.
+        // var imageDataURL = hidden_canvas.toDataURL('image/png');
+    
+        // Set the href attribute of the download button.
+        // document.querySelector('#dl-btn').href = imageDataURL;
+    }
 }

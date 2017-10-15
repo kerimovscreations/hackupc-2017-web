@@ -1,0 +1,52 @@
+header {
+    position: fixed;
+    width: 100vw;
+    padding: 30px;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+}
+
+header nav {
+    color: white;
+}
+
+header nav ul {
+    list-style-type: none;
+}
+
+header nav ul>li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.modal.login .modal-frame {
+    min-height: auto;
+}
+
+.modal.login .modal-header.title h1 {
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal.login .login-types a {
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    text-align: initial;
+    padding-left: 25px;
+}
+
+.modal.login .login-types a[data-name='facebook'] {
+    background-color: #3b5998;
+}
+
+.modal.login .login-types .input-wrapper {
+    margin-bottom: 20px;
+}
+
+.modal.login .login-types a[data-name='google'] {
+    background-color: #4885ed;
+}

@@ -45,13 +45,27 @@
                         <input type="file" id='file'>
                     </app-filedrop>
                 </div>
-                <div class="tab-content start-camera">
+                <div class="tab-content start-camera flex flex-col">
                     <div class="camera">
-                        <video id="video" class="camera_stream" width="496">Video stream not available.</video>
+                        <video id="video" class="camera_stream" width="496" [hidden]='isPictureTaken'>Video stream not available.</video>
+                        <img class="photo" alt="" [hidden]='!isPictureTaken'>
                     </div>
-                    <button (click)='takePicture()'>Click</button>
-                    <img src="photo" alt="">
                     <canvas></canvas>
+                    <div class="user-operations">
+                        <div class="flex flex-between">
+                            <div [hidden]='isPictureTaken'>
+                                <button (click)='takePicture()' class="button-style blue">Take picture</button>
+                            </div>
+                            <div [hidden]='!isPictureTaken'>
+                                <button (click)='takePicture()' class="button-style blue">Retake picture</button>
+                            </div>
+                            <div [hidden]='!isPictureTaken'>
+                                <button (click)='takePicture()' class="button-style blue">Upload</button>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
                 <div class="tab-content">
                     <input type="file" accept="image/*;capture=camera">

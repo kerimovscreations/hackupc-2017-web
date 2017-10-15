@@ -1,3 +1,46 @@
-<p>
-  header works!
-</p>
+<header>
+    <nav class="flex flex-end">
+        <ul>
+            <li *ngIf='!isUserLoggedIn'>
+                <a href="" (click)='toggleSignIn($event)'>Login</a>
+            </li>
+            <li *ngIf='isUserLoggedIn'>
+                <a href="" (click)='signOut($event)' routerLink='/notes'>Saved notes</a>
+            </li>
+            <li *ngIf='isUserLoggedIn'>
+                <a href="" (click)='signOut($event)'>Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div class="login modal flex flex-middle flex-center" *ngIf='!isUserLoggedIn'>
+    <div class="modal-frame">
+        <div class="modal-header title">
+            <h1>
+                Sign in with
+            </h1>
+        </div>
+        <div class="modal-body">
+            <div class="close" (click)='toggleSignIn($event)'>
+                <span class="lnr lnr-cross"></span>
+            </div>
+            <div class="login-types">
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <a href="#" data-name='facebook' class=" flex flex-center" (click)='signIn()'>
+                            <i class="fa fa-facebook-f flex-align-left"></i>
+                            <span class="flex-align-left">Facebook</span>
+                        </a>
+                    </div>
+                    <!-- <div class="input-wrapper">
+                        <a href="#" class='flex flex-center' data-name='google'>
+                            <i class="fa fa-google flex-align-left" aria-hidden="true"></i>
+                            <span class="flex-align-left">Google</span>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
