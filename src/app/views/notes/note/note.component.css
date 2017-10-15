@@ -5,6 +5,7 @@
   box-shadow: 0 3px 31px -8px rgba(0, 0, 0, 0.41);
   margin-bottom: 20px;
   overflow: hidden;
+  min-height: 5000px;
 }
 
 #note-content{
