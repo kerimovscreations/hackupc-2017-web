@@ -35,14 +35,14 @@
             <div class="modal-body flex-grow flex">
                 <div class="tab-content flex-grow active flex " data-name='upload'>
                     <app-filedrop class="flex-grow-full" (dragFileAccepted)="uploadfile( $event.file ) " (hoverIn)='hoverIn()' (hoverOut)='hoverOut()'>
-                        <label for="file" class="drop flex flex-middle flex-center flex-grow-full" [ngClass]='{"hovering":hovering}'>
+                        <label for="file" class="drop flex flex-middle flex-center flex-grow-full" [ngClass]='{"hovering":hovering}' >
                             <div class="flex flex-col label-content flex-grow-full" >
                                     <span class="lnr lnr-cloud-upload"></span>                     
                                     <span class='title'>DRAG & DROP</span>
                                     <p class='desc'>your files to Assets or browse</p>
                             </div>
                         </label>
-                        <input type="file" id='file'>
+                        <input type="file" id='file' (change)='uploadfile(file.files[0])' #file>
                     </app-filedrop>
                 </div>
                 <div class="tab-content start-camera flex flex-col">
@@ -60,7 +60,7 @@
                                 <button (click)='takePicture()' class="button-style blue">Retake picture</button>
                             </div>
                             <div [hidden]='!isPictureTaken'>
-                                <button (click)='takePicture()' class="button-style blue">Upload</button>
+                                <button (click)='takeSnapshot()' class="button-style blue">Upload</button>
                             </div>
 
                         </div>

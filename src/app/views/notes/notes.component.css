@@ -1,0 +1,35 @@
+.note {
+    background: white;
+    padding: 20px;
+    border-radius: 7px;
+    box-shadow: 0 3px 31px -8px rgba(0, 0, 0, 0.41);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.note .note-preview {
+    width: 230px;
+    height: 210px;
+    margin: -20px 0 -23px -20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.note .note-desc {
+    padding-left: 20px;
+}
+
+.note .note-desc .details{
+    height: 100%;
+}
+.note .note-desc .title h1 {
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #2ba0e2;
+}
+
+.note .note-desc .date{
+    font-weight: 300;
+    color: #bbb8b8;
+}

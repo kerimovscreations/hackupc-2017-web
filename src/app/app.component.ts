@@ -7,7 +7,11 @@ declare var $;
 })
 export class AppComponent implements AfterViewInit {
   title = 'app';
-
+  public options = {
+    position: ["bottom", "right"],
+    timeOut: 5000,
+    lastOnBottom: true
+}
   ngAfterViewInit(){
     $(document).on('click', '.modal', function(e) {
       if($(e.target).closest('.modal-frame').length==0){

@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { HomeService } from "./home.service";
 
 declare var $;
 @Component({
@@ -7,16 +9,15 @@ declare var $;
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('file_upload') input;
+  @ViewChild("file_upload") input;
 
-  constructor() { }
+  constructor(private _homeService: HomeService,private _router:Router) {}
 
   uploadActive: boolean = false;
   hovering: boolean = false;
 
-
-  isPictureTaken:boolean=false;
-  ngOnInit() { }
+  isPictureTaken: boolean = false;
+  ngOnInit() {}
 
   onSelectPhoto() {
     $(".modal")
@@ -28,20 +29,21 @@ export class HomeComponent implements OnInit {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     this.initTabs();
-
   }
   initTabs() {
-    $(".tab-title").each(function (index, element) {
+    $(".tab-title").each(function(index, element) {
       $(this).attr("data-index", index);
       $(".tab-content")
         .eq(index)
         .attr("data-index", index);
-      $(this).click(function () {
+      $(this).click(function() {
         var index = $(this).data("index");
         $(".tab-title").removeClass("active");
         $(this).addClass("active");
         $(".tab-content").hide();
-        $('.tab-content[data-index="' + index + '"]').show().css('display', 'flex');
+        $('.tab-content[data-index="' + index + '"]')
+          .show()
+          .css("display", "flex");
       });
     });
   }
@@ -53,36 +55,33 @@ export class HomeComponent implements OnInit {
         video: true
       },
       // Success Callback
-      function (stream) {
-        var video: any = document.getElementById('video');
+      function(stream) {
+        var video: any = document.getElementById("video");
         // Create an object URL for the video stream and
         // set it as src of our HTLM video element.
         video.src = window.URL.createObjectURL(stream);
 
         // Play the video element to show the stream to the user.
         video.play();
-
       },
       // Error Callback
-      function (err) {
-
+      function(err) {
         // Most common errors are PermissionDenied and DevicesNotFound.
         console.error(err);
-
       }
     );
   }
   takePicture() {
-    let hidden_canvas:any = document.querySelector('canvas');
-    let video:any = document.querySelector('video.camera_stream');
-    let image:any = document.querySelector('img.photo');
+    let hidden_canvas: any = document.querySelector("canvas");
+    let video: any = document.querySelector("video.camera_stream");
+    let image: any = document.querySelector("img.photo");
 
     // Get the exact size of the video element.
     var width = video.offsetWidth;
     var height = video.offsetHeight;
 
     // Context object for working with the canvas.
-    var context = hidden_canvas.getContext('2d');
+    var context = hidden_canvas.getContext("2d");
 
     // Set the canvas to the same dimensions as the video.
     hidden_canvas.width = width;
@@ -92,34 +91,38 @@ export class HomeComponent implements OnInit {
     context.drawImage(video, 0, 0, width, height);
 
     // Get an image dataURL from the canvas.a
-    var imageDataURL = hidden_canvas.toDataURL('image/png');
+    var imageDataURL = hidden_canvas.toDataURL("image/png");
 
     // Set the dataURL as source of an image element, showing the captured photo.
-    image.setAttribute('src', imageDataURL);
+    image.setAttribute("src", imageDataURL);
     this.isPictureTaken = !this.isPictureTaken;
   }
 
   uploadfile(file) {
-    console.log(file);
+    this._homeService.uploadImage(file).subscribe(data=>{
+      console.log('/notes/shared/'+data['note'].access_token);      
+      console.log(data['note'].access_token);
+      this._router.navigate([('/notes/shared/'+data['note'].access_token)]);
+    });
   }
 
   hoverIn() {
-    console.log('hovein');
+    console.log("hovein");
     this.hovering = true;
   }
   hoverOut() {
     this.hovering = false;
   }
 
-   // tslint:disable-next-line:one-line
-   takeSnapshot(){
-    
-        //...
-    
-        // Get an image dataURL from the canvas.
-        // var imageDataURL = hidden_canvas.toDataURL('image/png');
-    
-        // Set the href attribute of the download button.
-        // document.querySelector('#dl-btn').href = imageDataURL;
-    }
+  // tslint:disable-next-line:one-line
+  takeSnapshot() {
+    //...
+    let hidden_canvas: any = document.querySelector("canvas");
+
+    // Get an image dataURL from the canvas.
+    var imageDataURL = hidden_canvas.toDataURL("image/png");
+
+    // Set the href attribute of the download button.
+    // document.querySelector('#dl-btn').href = imageDataURL;
+  }
 }

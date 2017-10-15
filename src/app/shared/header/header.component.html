@@ -1,14 +1,19 @@
 <header>
-    <nav class="flex flex-end">
+    <nav class="flex flex-between flex-middle">
+        <div class="brand-name">
+            <a routerLink='/'>
+                <img src="./assets/images/logo.png" width='220' alt="">
+            </a>
+        </div>
         <ul>
             <li *ngIf='!isUserLoggedIn'>
-                <a href="" (click)='toggleSignIn($event)'>Login</a>
+                <a href="#" (click)='toggleSignIn($event)'>Login</a>
             </li>
             <li *ngIf='isUserLoggedIn'>
-                <a href="" (click)='signOut($event)' routerLink='/notes'>Saved notes</a>
+                <a href="#" (click)='signOut($event)' routerLink='/notes'>Saved notes</a>
             </li>
             <li *ngIf='isUserLoggedIn'>
-                <a href="" (click)='signOut($event)'>Logout</a>
+                <a href="#" (click)='signOut($event)'>Logout</a>
             </li>
         </ul>
     </nav>
